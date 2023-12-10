@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="images/favicon.png" rel="icon">
+        <link href="styles/main.css" rel="stylesheet">
+        
+        <title>Numbers Toolkit</title>
+
+        <script>
+            
+            // strtoint functionality
+            function extractNumbers(text)
+            {
+                numberRegex = /-?\d*\.?\d+/g;
+                matches = text.match(numberRegex);
+                matches = matches.join('     ');
+                document.getElementById('outputNum').value = matches;
+            }
+            
+            document.addEventListener('DOMContentLoaded', function(){
+                document.getElementById('upload').addEventListener('change', function(event) {
+                    fileInput = event.target;
+                    file = fileInput.files[0];
+                    if (file)
+                    {
+                        fileReader = new FileReader();
+                        fileReader.onload = function(e){
+                            fileContent = e.target.result;
+                            document.getElementById('inputNum').value = fileContent;
+                            extractNumbers(fileContent);
+                        };
+                        fileReader.readAsText(file);
+                    }
+                });
+            })
+
+            // calculator functionality
+            
+
+            // number generator functionality
+            function random()
+            {
+                min = parseInt(document.getElementById('minValue').value);
+                max = parseInt(document.getElementById('maxValue').value);
+                if (min < max)
+                {
+                    number = Math.floor(Math.random() * (max - min + 1) + min);
+                    document.getElementById('resulttext').textContent = 'Result: ';
+                    document.getElementById('resultnumber').textContent = `${number}`;
+                }
+                else if (min == max)
+                {
+                    document.getElementById('resulttext').textContent = 'Result: ';
+                    document.getElementById('resultnumber').textContent = `${min}`;
+                }
+                else
+                    document.getElementById('resulttext').textContent = 'Please enter correct numbers!';
+            }
+
+            function copyRandom()
+            {
+                numbercopy = document.getElementById('resultnumber').innerHTML;
+                if (numbercopy != '')
+                    navigator.clipboard.writeText(numbercopy);
+            }
+
+        </script>
+    </head>
+    <body>
+
+        <div class="bg-image"></div>
+
+        <main>
+            <div class="mainContainer">
+                <div class="strtoint">
+                    <textarea id="inputNum" placeholder="Enter your text here"></textarea>
+                    <div id="STRbuttons">
+                        <button class="btn btn-dark" onclick="extractNumbers(document.getElementById('inputNum').value)">Extract Numbers</button>
+                        <input hidden type="file" id="upload"> 
+                        <label for="upload" class="btn btn-primary" id="uploadButton">Upload File</label>
+                    </div>
+                    <textarea id="outputNum" placeholder="Numbers extracted will be displayed here"></textarea>
+                </div>
+
+                <div class="calculatorContainer">
+                    <input disabled id="evalscreen" type="text">
+                    <input disabled id="screen" type="text">
+                    <br>
+                    <div class = "calculatorbuttons">
+                        <button onclick="appendOperator('%')">%</button>
+                        <button onclick="clearScreen()">CE</button>
+                        <button onclick="clearEvalScreen()">C</button>
+                        <button onclick="appendOperator('/')">/</button>
+                        <br>
+                        <button onclick="appendDigit('7')" >7</button>
+                        <button onclick="appendDigit('8')">8</button>
+                        <button onclick="appendDigit('9')">9</button>
+                        <button onclick="appendOperator('*')">*</button>
+                        <br>
+                        <button onclick="appendDigit('4')">4</button>
+                        <button onclick="appendDigit('5')">5</button>
+                        <button onclick="appendDigit('6')">6</button>
+                        <button onclick="appendOperator('-')">-</button>
+                        <br>
+                        <button onclick="appendDigit('1')">1</button>
+                        <button onclick="appendDigit('2')">2</button>
+                        <button onclick="appendDigit('3')">3</button>
+                        <button onclick="appendOperator('+')">+</button>
+                        <br>
+                        <button onclick="removeLastCharacter()">&#8592;</button>
+                        <button onclick="appendDigit('0')">0</button>
+                        <button onclick="appendDecimal()">.</button>
+                        <button onclick="calculate()" class="btn btn-primary">=</button>
+                    </div>
+                </div>
+
+                <div class="numberPickerContainer">
+                    <h3>Number Generator</h3>
+                    <form id="numberpickerform">
+                        <label for="minValue"><b>MIN</b></label>
+                        <input required id="minValue" type="number">
+                        <label for="maxValue"><b>MAX</b></label>
+                        <input required id="maxValue" type="number">
+                        <div>
+                            <p id="resulttext"></p>
+                            <p id="resultnumber"></p>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-dark" onclick="random()">Generate</button>
+                            <button type="button" class="btn btn-dark" onclick="copyRandom()">Copy to clipboard</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer>
+            &copy; 2023 Numbers Toolkit. All rights reserved.
+            <br>
+            <a href="https://www.flaticon.com/free-icons/work-experience" title="work experience icons">Favicon created by MEDZ - Flaticon</a>
+        </footer>
+    </body>
+</html>
