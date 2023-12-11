@@ -83,66 +83,72 @@
     </head>
     <body>
 
-        <div class="bg-image"></div>
-
         <main class="mainContainer">
-            <div class="numberExtractorContainer">
-                <h2>Number Extractor</h2>
-                <textarea id="inputNum" placeholder="Enter your text here"></textarea>
-                <div id="STRbuttons">
-                    <button class="btn btn-dark" onclick="extractNumbers('inputNum')">Extract Numbers</button>
-                    <button class="btn btn-dark" onclick="clearScreen('inputNum')">Clear Screen</button>
-                    <input hidden type="file" id="upload"> 
-                    <label for="upload" class="btn btn-primary" id="uploadButton">Upload File</label>
-                    <button class="btn btn-dark" onclick="copyToClipboard('outputNum')">Copy Numbers</button>
+            <div class="underMainContainer">
+                <div class="numberExtractorContainer">
+                    <h2>Number Extractor</h2>
+                    <div class="numberExtractorText">
+                        <textarea id="inputNum" placeholder="Enter your text here"></textarea>
+                        <textarea id="outputNum" placeholder="Numbers extracted will be displayed here"></textarea>
+                    </div>
+                    <div class="numberExtractorButtons">
+                        <button class="btn btn-dark" onclick="extractNumbers('inputNum')">Extract Numbers</button>
+                        <input hidden type="file" id="upload"> 
+                        <label for="upload" class="btn btn-primary" id="uploadButton">Upload File</label>
+                        <button class="btn btn-dark" onclick="copyToClipboard('outputNum')">Copy Numbers</button>
+                        <button class="btn btn-dark" onclick="clearScreen('inputNum')">Clear Input</button>
+                    </div>
                 </div>
-                <textarea id="outputNum" placeholder="Numbers extracted will be displayed here"></textarea>
-            </div>
 
-            <div class="calculatorContainer">
-                <h2>Calculator</h2>
-                <input disabled id="screen" type="text">
-                <br>
-                <div class = "calculatorButtons">
-                    <button onclick="appendOperator('%')">%</button>
-                    <button onclick="clearScreen()">CE</button>
-                    <button onclick="appendOperator('/')">/</button>
-                    <br>
-                    <button onclick="appendDigit('7')" >7</button>
-                    <button onclick="appendDigit('8')">8</button>
-                    <button onclick="appendDigit('9')">9</button>
-                    <button onclick="appendOperator('*')">*</button>
-                    <br>
-                    <button onclick="appendDigit('4')">4</button>
-                    <button onclick="appendDigit('5')">5</button>
-                    <button onclick="appendDigit('6')">6</button>
-                    <button onclick="appendOperator('-')">-</button>
-                    <br>
-                    <button onclick="appendDigit('1')">1</button>
-                    <button onclick="appendDigit('2')">2</button>
-                    <button onclick="appendDigit('3')">3</button>
-                    <button onclick="appendOperator('+')">+</button>
-                    <br>
-                    <button onclick="removeLastCharacter()">&#8592;</button>
-                    <button onclick="appendDigit('0')">0</button>
-                    <button onclick="appendDecimal()">.</button>
-                    <button onclick="calculate()" class="btn btn-primary">=</button>
+                <div class="calculatorContainer">
+                    <h2>Calculator</h2>
+                    <div class="calculator">
+                        <input disabled id="calculatorScreen" type="text">
+                        <br>
+                        <div class = "calculatorButtons">
+                            
+                            <button onclick="clearScreen()">C</button>
+                            <button onclick="appendOperator('%')">rad</button>
+                            <button onclick="appendOperator('%')">%</button>
+                            <button onclick="appendOperator('/')">/</button>
+                            <br>
+                            <button onclick="appendDigit('7')" >7</button>
+                            <button onclick="appendDigit('8')">8</button>
+                            <button onclick="appendDigit('9')">9</button>
+                            <button onclick="appendOperator('*')">*</button>
+                            <br>
+                            <button onclick="appendDigit('4')">4</button>
+                            <button onclick="appendDigit('5')">5</button>
+                            <button onclick="appendDigit('6')">6</button>
+                            <button onclick="appendOperator('-')">-</button>
+                            <br>
+                            <button onclick="appendDigit('1')">1</button>
+                            <button onclick="appendDigit('2')">2</button>
+                            <button onclick="appendDigit('3')">3</button>
+                            <button onclick="appendOperator('+')">+</button>
+                            <br>
+                            <button onclick="removeLastCharacter()">&#8592;</button>
+                            <button onclick="appendDigit('0')">0</button>
+                            <button onclick="appendDecimal()">.</button>
+                            <button onclick="calculate()">=</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="numberPickerContainer">
-                <h2>Number Generator</h2>
-                <label for="minValue"><b>MIN</b></label>
-                <input required id="minValue" type="number">
-                <label for="maxValue"><b>MAX</b></label>
-                <input required id="maxValue" type="number">
-                <div class="numberPickerResult">
-                    <p id="numberPickerTextResult"></p>
-                    <p id="numberPickerNumericResult"></p>
-                </div>
-                <div class="numberPickerButtons">
-                    <button type="button" class="btn btn-dark" onclick="random()">Generate</button>
-                    <button type="button" class="btn btn-dark" onclick="copyToClipboard('numberPickerNumericResult')">Copy Number</button>
+                <div class="numberPickerContainer">
+                    <h2>Number Generator</h2>
+                    <label for="minValue"><b>MIN</b></label>
+                    <input required id="minValue" type="number">
+                    <label for="maxValue"><b>MAX</b></label>
+                    <input required id="maxValue" type="number">
+                    <div class="numberPickerResult">
+                        <p id="numberPickerTextResult"></p>
+                        <p id="numberPickerNumericResult"></p>
+                    </div>
+                    <div class="numberPickerButtons">
+                        <button type="button" class="btn btn-dark" onclick="random()">Generate</button>
+                        <button type="button" class="btn btn-dark" onclick="copyToClipboard('numberPickerNumericResult')">Copy Number</button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -159,7 +165,7 @@
             </svg>
             <a href="https://www.linkedin.com/in/matei-dragos-7b051b296/" alt="LinkedIn Profile">Matei Dragos</a>
             <br>
-            <a href="https://www.flaticon.com/free-icons/work-experience" title="work experience icons">Favicon created by MEDZ - Flaticon</a>
+            <a href="https://www.freepik.com/search?format=search&last_filter=query&last_value=toolkit&query=toolkit&type=icon">Favicon from Freepik</a>
         </footer>
     </body>
 </html>
