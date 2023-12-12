@@ -46,10 +46,12 @@ body {
 }
 
 /* Number Extractor */
-.underNumberExtractorContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.numberExtractorText textarea {
+    resize: none;
+    margin: 10px 0;
+    padding: 5px 5px;
+    width: 49%;
+    height: 150px;
 }
 
 .numberExtractorButtons {
@@ -58,20 +60,25 @@ body {
 }
 
 .numberExtractorButtons button, label{
-    margin: 0 4px;
+    margin: 5px 4px;
 }
 
 /* Calculator */
 .calculator {
     width: 262px;
+    margin-top: 8px;
     border: 2px solid rgb(163, 163, 163);
 }
 
 #calculatorScreen {
     width: 100%;
     height: 50px;
+    padding-right: 10px;
     border: 1px solid rgb(163, 163, 163);
-    background-color: rgb(224, 224, 224);;
+    background-color: rgb(224, 224, 224);
+    text-align: right;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .calculatorButtons {
@@ -91,6 +98,10 @@ body {
 }
 
 /* Number Picker */
+.numberPickerContainer {
+    margin-bottom: 40px;
+}
+
 .numberPickerResult {
     font-weight: bold;
     font-size: 1.2rem;

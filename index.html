@@ -14,22 +14,24 @@
         <script>
             
             // strtoint functionality
-            function extractNumbers(element)
-            {
+            function extractNumbers(element) {
                 text = document.getElementById(element).value;
                 numberRegex = /-?\d*\.?\d+/g;
                 matches = text.match(numberRegex);
-                matches = matches.join('     ');
-                document.getElementById('outputNum').value = matches;
-            }
-            
-            function clearScreen(element)
-            {
-                display = document.getElementById(element);
-                display.value = '';
+                output = document.getElementById('outputNum');
+                if (matches !== null) {
+                    hiddenMatches = matches.join(' ');
+                    document.getElementById('hiddenOutputNum').value = hiddenMatches;
+                    matches = matches.join(' , ');
+                    output.value = matches;
+                }
+                else {
+                    output.value = '';
+                    output.placeholder = 'No numbers to extract!';
+                }
             }
 
-            document.addEventListener('DOMContentLoaded', function(){
+            document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('upload').addEventListener('change', function(event) {
                     fileInput = event.target;
                     file = fileInput.files[0];
@@ -39,7 +41,7 @@
                         fileReader.onload = function(e){
                             fileContent = e.target.result;
                             document.getElementById('inputNum').value = fileContent;
-                            extractNumbers(fileContent);
+                            extractNumbers('inputNum');
                         };
                         fileReader.readAsText(file);
                     }
@@ -47,11 +49,36 @@
             })
 
             // calculator functionality
+            function clearScreen(screenId) {
+                document.getElementById(screenId).value = '';
+            }
+
+            function removeLastCharacter(screenId) {
+                screen = document.getElementById(screenId).value;
+                document.getElementById(screenId).value = screen.slice(0, -1);
+            }
+
+            function appendDigit(digit) {
+                document.getElementById('calculatorScreen').value += digit;
+            }
             
+            // !!! DOES NOT WORK AS PROPOSED !!!
+            function appendOperator(operator) {
+                document.getElementById('calculatorScreen').value += operator; 
+            }
+
+            function appendDecimal() {
+                document.getElementById('calculatorScreen').value += '.';
+            }
+
+            function calculate() {
+                screen = document.getElementById('calculatorScreen').value;
+                document.getElementById('calculatorScreen').value = eval(screen);
+            }
+            // ---------------------------------
 
             // number generator functionality
-            function random()
-            {
+            function random() {
                 min = parseInt(document.getElementById('minValue').value);
                 max = parseInt(document.getElementById('maxValue').value);
                 if (min < max)
@@ -72,9 +99,9 @@
                 }
             }
 
-            function copyToClipboard(element)
-            {
-                numbercopy = document.getElementById(element).innerHTML;
+            function copyToClipboard(element) {
+                elementId = document.getElementById(element);
+                numbercopy = elementId instanceof HTMLInputElement ? elementId.value : elementId.innerText;
                 if (numbercopy != '')
                     navigator.clipboard.writeText(numbercopy);
             }
@@ -90,13 +117,14 @@
                     <div class="numberExtractorText">
                         <textarea id="inputNum" placeholder="Enter your text here"></textarea>
                         <textarea id="outputNum" placeholder="Numbers extracted will be displayed here"></textarea>
+                        <input hidden id="hiddenOutputNum">
                     </div>
                     <div class="numberExtractorButtons">
                         <button class="btn btn-dark" onclick="extractNumbers('inputNum')">Extract Numbers</button>
                         <input hidden type="file" id="upload"> 
                         <label for="upload" class="btn btn-primary" id="uploadButton">Upload File</label>
-                        <button class="btn btn-dark" onclick="copyToClipboard('outputNum')">Copy Numbers</button>
-                        <button class="btn btn-dark" onclick="clearScreen('inputNum')">Clear Input</button>
+                        <button class="btn btn-dark" onclick="copyToClipboard('hiddenOutputNum')">Copy Numbers</button>
+                        <button class="btn btn-dark" onclick="clearScreen('inputNum'); clearScreen('outputNum')">Clear</button>
                     </div>
                 </div>
 
@@ -106,9 +134,8 @@
                         <input disabled id="calculatorScreen" type="text">
                         <br>
                         <div class = "calculatorButtons">
-                            
-                            <button onclick="clearScreen()">C</button>
-                            <button onclick="appendOperator('%')">rad</button>
+                            <button disabled>&#128540;</button>
+                            <button onclick="clearScreen('calculatorScreen')">C</button>
                             <button onclick="appendOperator('%')">%</button>
                             <button onclick="appendOperator('/')">/</button>
                             <br>
@@ -127,7 +154,7 @@
                             <button onclick="appendDigit('3')">3</button>
                             <button onclick="appendOperator('+')">+</button>
                             <br>
-                            <button onclick="removeLastCharacter()">&#8592;</button>
+                            <button onclick="removeLastCharacter('calculatorScreen')">&#8592;</button>
                             <button onclick="appendDigit('0')">0</button>
                             <button onclick="appendDecimal()">.</button>
                             <button onclick="calculate()">=</button>

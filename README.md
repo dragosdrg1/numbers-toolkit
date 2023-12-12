@@ -8,34 +8,34 @@
 
     My website is made up of one page for the simplicity of using the tools and the lack of need for other details.
 
-    In the left side of the page is located the **numbers extractor** which was the main reason for the website. To use it properly you should enter the desired text in the first textbox using copy-paste or you could upload a text document by pressing 'Upload file' button then selecting the desired document. Afterwards, you should press 'Extract numbers' button and the result will be displayed in the second textbox.
+    In the first part of the page is located the Numbers Extractor which was the main idea of the website. To use it properly you should enter the desired text in the first textbox using copy-paste or you could upload a text document by pressing 'Upload file' button then selecting the desired document. Afterwards, you should press 'Extract numbers' button and the result will be displayed in the second textbox.
 
-    In the right upper corner you can see the **calculator** which is a rudimentary basic calculator, but it comes in handy. The design is inspired by Microsoft Windows 10 calculator, but with some minor changes to ensure originality and you can use it roughly the same way.
+    In the second part the Calculator can be seen which is a rudimentary basic calculator, but it comes in handy.
 
-    In the right lower corner you can see the **random number generator** which works like any other basic number generator existing on internet, but once again it is at hand. 
+    In the last part the Random Number Generator can be seen which works like any other basic number generator existing on internet, but once again it is at hand. 
 
 ## Features
 
 - Numbers extractor
 - Basic calculator
 - Random number generator
-- No need to leave website environment for basic tools
+- No need to leave website environment for basic math tools
 
 ## Project Explanation
 ### HTML Structure
 
     1. Text to numbers Section:
         - Text areas for input and output
-        - Buttons for triggering 'extractNumbers' function and file upload 
+        - Buttons for number extraction, file upload, numbers copier and screen clearer
 
     2. Calculator Section:
-        - 2 screens like in the windows calculator for displaying operations and the result
+        - A screen for displaying operations and the result
         - Buttons for digits and operations
 
     3. Random number generator Section:
         - Input fields for specifying minimum and maximum
         - Result area for the result
-        - Button for triggering 'random' function and button for copying to clipboard
+        - A button for number generator and a button for copying to clipboard
 
 ### CSS Styling
 
@@ -46,17 +46,7 @@
         - Set the background color and it's opacity
         - Set the border width and it's color
 
-    .strtoint and .calculator and .numberpicker:
-        - Set the layout of the each div
-
-    .strtoint textarea:
-        - Styles the textareas
-    
-    .strtoint #STRbuttons:
-        - Styles the buttons
-
-    .calculator input, .numberpicker input:
-        - Styles the 2 screens of the calculator
+    !!! CSS NEED TO BE UPDATED !!!
 
 ### Javascript Functions
 
@@ -94,16 +84,18 @@
         copyRandom():
             - Copy to clipboard the number generated when the specific button is pressed
 
+        !!! JAVASCRIPT NEED TO BE UPDATED !!!
+
 ## File Dependencies
 
-- The website utilizes the Bootstrap framework for styling
+- The website is in index.html where HTML and JavaScript code is located
 - The CSS styles are defined in the main.css file
 - A favicon and background image located in images folder are used for enhanced visual appearence
 
 ## Notes
 
 - The application relies on the browser's JavaScript functionality and may not work properly with JavaScript disabled.
-- I know that the project has a terribled designed css, but I've tried very hard to fix this but I could not figure out how to fix it
-- I will do my best to rewrite the css in the future
+- The website utilizes the Bootstrap framework for styling buttons
+- You can add any features as you want
 
 ### Enjoy using Numbers Toolkit website!
