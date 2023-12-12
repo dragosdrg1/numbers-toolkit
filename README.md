@@ -1,6 +1,4 @@
 # Numbers Toolkit
-#### Video Demo:  
-    https://youtu.be/YY0CF4x8fS0
 #### Description: 
     This project aims to provide basic tools at hand for working with numbers.
 
