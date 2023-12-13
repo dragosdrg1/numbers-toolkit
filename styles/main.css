@@ -107,9 +107,17 @@ body {
     border: 1px solid black;
 }
 
+.calculatorButtons button:active {
+    background-color: rgb(150, 144, 144);
+}
+
 /* Number Picker */
 .numberPickerContainer {
     margin-bottom: 40px;
+}
+
+.numberPickerContainer input {
+    padding-left: 5px;
 }
 
 .numberPickerResult {

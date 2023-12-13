@@ -13,6 +13,8 @@
 
         <script>
             
+            egal = false;
+
             // strtoint functionality
             function extractNumbers(element) {
                 text = document.getElementById(element).value;
@@ -63,6 +65,11 @@
             }
 
             function appendDigit(digit) {
+                if (egal === true)
+                {
+                    clearScreen('calculatorScreen');
+                    egal = false;
+                }
                 document.getElementById('calculatorScreen').placeholder = '0';
                 document.getElementById('calculatorScreen').value += digit;  
             }
@@ -76,12 +83,17 @@
                 screen = document.getElementById('calculatorScreen').value;
                 lastChar = screen.slice(-1);
                 if (screen.length != 0 && !isOperator(lastChar))
-                    document.getElementById('calculatorScreen').value += operator; 
+                {
+                    egal = false;
+                    document.getElementById('calculatorScreen').value += operator;
+                }
             }
 
             function calculate() {
                 screen = document.getElementById('calculatorScreen').value;
-                try {
+                if (!isOperator(screen.slice(-1)))
+                {
+                    egal = true;
                     result = eval(screen);
                     if (result == 'Infinity')
                     {
@@ -94,8 +106,6 @@
                     }
                     else
                         document.getElementById('calculatorScreen').value = result;
-                } catch {
-                    // no code in case of error
                 }
             }
 
