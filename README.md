@@ -37,14 +37,18 @@
 
 ### CSS Styling
 
-    .bg-image:
-        - Sets background image
+    body:
+        - Setting font
 
-    .strtoint, .calculator, .numberpicker:
-        - Set the background color and it's opacity
-        - Set the border width and it's color
+    .mainContainer:
+        - Setting page layout
 
-    !!! CSS NEED TO BE UPDATED !!!
+    .mainContainer::before:
+        - Setting background image
+    
+    .numberExtractorContainer, .numberPickerContainer, .calculatorContainer:
+        - Setting divs layout
+
 
 ### Javascript Functions
 
@@ -55,34 +59,29 @@
             - If the 'Upload file' button is pressed then the function get the file content and call the 'extractNumbers' function
     
     2. Calculator:
-        isOperator(character):
-            - Check if the character inputted is an operator
-        appendOperator():
-            - Append to the smaller screen expression the operator selected
-            - If the screen must be reset then the clear screens functions are called
-        appendDecimal():
-            - Append to the bigger screen number a '.' for decimal numbers
-            - If the screen must be reset then the clear screens functions are called
-        calculate():
-            - Evaluate expression on the smalle screen only if possible
-            - If the expression can not be evaluated then a error message is displayed
-        clearEvalScreen():
-            - Clear the smaller screen
         clearScreen():
-            - Clear the bigger screen
-        appendDigit(digit):
-            - Append to the bigger screen number the digit selected
-            - If the screen must be reset then the clear screens functions are called
+            - Clear the screen
+        setZero(screenId):
+            - Replace the '0' placeholder
         removeLastCharacter():
-            - Remove last character on the bigger screen when the specific button is pressed
-    
+            - Remove last character from the screen
+        appendDigit(digit):
+            - Append to the screen the digit given
+            - Replace the '0' placeholder in case the screen has displayed a error before
+        isOperator(char):
+            - Check if the given character is an operator
+        appendOperator(operator):
+            - Append to the expression the operator given
+        calculate():
+            - Evaluate expression if possible
+            - If the expression can not be evaluated then a error message is displayed
+
     3. Random number generator:
         random():
-            - Generates a random number in a range when the specific button is pressed
+            - Generates a random number in a range
         copyRandom():
-            - Copy to clipboard the number generated when the specific button is pressed
+            - Copy to clipboard the random number generated or the the numbers from number extractor
 
-        !!! JAVASCRIPT NEED TO BE UPDATED !!!
 
 ## File Dependencies
 
@@ -94,6 +93,6 @@
 
 - The application relies on the browser's JavaScript functionality and may not work properly with JavaScript disabled.
 - The website utilizes the Bootstrap framework for styling buttons
-- You can add any features as you want
+- You are welcome to add or improve any features of the project
 
 ### Enjoy using Numbers Toolkit website!

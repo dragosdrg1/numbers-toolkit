@@ -53,29 +53,51 @@
                 document.getElementById(screenId).value = '';
             }
 
+            function setZero(screenId) {
+                document.getElementById(screenId).placeholder = '0';
+            }
+
             function removeLastCharacter(screenId) {
                 screen = document.getElementById(screenId).value;
                 document.getElementById(screenId).value = screen.slice(0, -1);
             }
 
             function appendDigit(digit) {
-                document.getElementById('calculatorScreen').value += digit;
-            }
-            
-            // !!! DOES NOT WORK AS PROPOSED !!!
-            function appendOperator(operator) {
-                document.getElementById('calculatorScreen').value += operator; 
+                document.getElementById('calculatorScreen').placeholder = '0';
+                document.getElementById('calculatorScreen').value += digit;  
             }
 
-            function appendDecimal() {
-                document.getElementById('calculatorScreen').value += '.';
+            function isOperator(char) {
+                const operators = ['+', '-', '*', '/', '%', '.'];
+                return operators.includes(char);
+            }
+
+            function appendOperator(operator) {
+                screen = document.getElementById('calculatorScreen').value;
+                lastChar = screen.slice(-1);
+                if (screen.length != 0 && !isOperator(lastChar))
+                    document.getElementById('calculatorScreen').value += operator; 
             }
 
             function calculate() {
                 screen = document.getElementById('calculatorScreen').value;
-                document.getElementById('calculatorScreen').value = eval(screen);
+                try {
+                    result = eval(screen);
+                    if (result == 'Infinity')
+                    {
+                        document.getElementById('calculatorScreen').value = '';
+                        document.getElementById('calculatorScreen').placeholder = 'Error';
+                    }
+                    else if (typeof result === "undefined")
+                    {
+                        // no code for not changing anything when pressing '=' while empty input
+                    }
+                    else
+                        document.getElementById('calculatorScreen').value = result;
+                } catch {
+                    // no code in case of error
+                }
             }
-            // ---------------------------------
 
             // number generator functionality
             function random() {
@@ -131,11 +153,11 @@
                 <div class="calculatorContainer">
                     <h2>Calculator</h2>
                     <div class="calculator">
-                        <input disabled id="calculatorScreen" type="text">
+                        <input disabled placeholder="0" id="calculatorScreen" type="text">
                         <br>
                         <div class = "calculatorButtons">
                             <button disabled>&#128540;</button>
-                            <button onclick="clearScreen('calculatorScreen')">C</button>
+                            <button onclick="clearScreen('calculatorScreen'); setZero('calculatorScreen')">C</button>
                             <button onclick="appendOperator('%')">%</button>
                             <button onclick="appendOperator('/')">/</button>
                             <br>
@@ -156,7 +178,7 @@
                             <br>
                             <button onclick="removeLastCharacter('calculatorScreen')">&#8592;</button>
                             <button onclick="appendDigit('0')">0</button>
-                            <button onclick="appendDecimal()">.</button>
+                            <button onclick="appendOperator('.')">.</button>
                             <button onclick="calculate()">=</button>
                         </div>
                     </div>
